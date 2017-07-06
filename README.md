@@ -1,3 +1,3 @@
 # PolySent
-# A script written by Christine Park 
-# !!
+A script written by Christine Park 
+
