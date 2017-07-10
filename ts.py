@@ -3,11 +3,15 @@
 influencial figures about given topics"""
 
 from __future__ import print_function
-import pprint
 import tweepy
-import requests
 import numpy as np
+import matplotlib.pyplot as plt; plt.rcdefaults()
+import numpy as np
+import matplotlib.pyplot as plt
+import requests
 import json
+
+
 
 consumer_key = 'oZNDqncnvc9hFDwYocRGukS0V'
 consumer_key_secret = 'wh4kSf3Xa11HWdShuW3Wdqkgdq67wOAeW7FCeTklUltshF6eZA'
@@ -20,6 +24,7 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 topic_dict = json.loads(open("topic_data.json", "r").read())
+sent_dict = {}
 
 handles = open("influencers.txt", "r")
 
@@ -65,15 +70,14 @@ def scrape_user(user_list):
 
 def calc_sent(tweet):
 	tweet_text = tweet.text.encode("utf-8")
-	sent_dict = {}
 	sent_data = [
 		('text', tweet_text)
 	]
 	sent_result = requests.post('http://text-processing.com/api/sentiment/', data=sent_data)
 	sent_json = sent_result.json()
-	sent_dict['pos'] = str('{:4.2f}'.format(sent_json['probability']['pos'] * 100)) + "%"
-	sent_dict['neg'] = str('{:4.2f}'.format(sent_json['probability']['neg'] * 100)) + "%"
-	sent_dict['neutral'] = str('{:4.2f}'.format(sent_json['probability']['neutral'] * 100)) + "%"
+	sent_dict['pos'] = int(round(sent_json['probability']['pos'] * 100))
+	sent_dict['neg'] = int(round(sent_json['probability']['neg'] * 100))
+	sent_dict['neutral'] = int(round(sent_json['probability']['neutral'] * 100))
 	return sent_dict
 
 def struct_json(topic):
@@ -83,8 +87,22 @@ def struct_json(topic):
 	topic_dict[t]['users'] = scrape_user(open('influencers.txt', 'r'))
 	return topic_dict
 
+def plot():
+	mu_pos = np.mean(sent_dict['pos'])
+	mu_neg = np.mean(sent_dict['neg'])
+	mu_neu = np.mean(sent_dict['neutral'])
+	labels = ('Positive', 'Negative', 'Neutral')
+	y_pos = np.arange(len(labels))
+	performance = [mu_pos, mu_neg, mu_neu]
+
+	plt.barh(y_pos, performance, align='center', alpha=0.6)
+	plt.yticks(y_pos, labels)
+	plt.xlabel('Sentiment Score')
+	plt.title('Sentiment Analysis of Given Topic: ' + query)
+	plt.show()
+
 
 query = raw_input("Enter your topic: ")
-
 with open('topic_data.json', 'w') as fo:
 	fo.write(json.dumps(struct_json(query), indent=4, sort_keys=False))
+plot()
