@@ -6,7 +6,6 @@ from __future__ import print_function
 import tweepy
 import numpy as np
 import matplotlib.pyplot as plt; plt.rcdefaults()
-import numpy as np
 import matplotlib.pyplot as plt
 import requests
 import json
@@ -24,13 +23,15 @@ api = tweepy.API(auth)
 topic_dict = json.loads(open("topic_data.json", "r").read())
 
 handles = open("influencers.txt", "r")
-np.sent_scores = []
+sent_scores = []
 
 def general_scrape(query):
 	q = query
 	tweet_struct = {}
 	tweet_struct[q] = {}
-	tweets = api.search(q=query)
+	tweets = api.search(q=query, pages=5)
+	print("[SCRAPING] general users")
+	print("...")
 	sum_pos = 0
 	sum_neg = 0
 	sum_neu = 0
@@ -57,7 +58,7 @@ def general_scrape(query):
 		sum_neu += sent_dict['neutral']
 		tweet_struct[q][id]['sentiment'] = sent_dict
 		tweet_counter += 1
-	sent_scores.append((sum_pos / tweet_counter, sum_neg / tweet_counter, sum_neu / tweet_counter))
+	sent_scores.append([sum_pos / tweet_counter, sum_neg / tweet_counter, sum_neu / tweet_counter])
 	return tweet_struct
 
 
@@ -98,8 +99,8 @@ def scrape_user(user_list):
 			sent_dict['neutral'] = int(round(sent_json['probability']['neutral'] * 100))
 			sum_neu += sent_dict['neutral']
 			user_struct[u][id]['sentiment'] = sent_dict
-			tweet_counter +=1
-	sent_scores.append((sum_pos/tweet_counter, sum_neg/tweet_counter, sum_neu/tweet_counter))
+			tweet_counter += 1
+	sent_scores.append([sum_pos/tweet_counter, sum_neg/tweet_counter, sum_neu/tweet_counter])
 	return user_struct
 
 
@@ -107,18 +108,32 @@ def struct_json(topic):
 	t = topic
 	topic_dict[t] = {}
 	topic_dict[t]['general'] = general_scrape(topic)
-	#topic_dict[t]['users'] = scrape_user(open('influencers.txt', 'r'))
+	topic_dict[t]['users'] = scrape_user(open('influencers.txt', 'r'))
 	print(sent_scores)
 	return topic_dict
 
-def plot(score_array):
+def plot():
 	labels = ('Positive', 'Negative', 'Neutral')
 	y_pos = np.arange(len(labels))
-	performance = [mu_pos, mu_neg, mu_neu]
-	plt.barh(y_pos, performance, align='center', alpha=0.6)
+	performance_general = sent_scores[0]
+	performance_user = sent_scores[1]
+
+	plt.figure(1)
+	plt.subplot(221)
+	plt.barh(y_pos, performance_general, align='center', alpha=0.6)
 	plt.yticks(y_pos, labels)
 	plt.xlabel('Sentiment Score')
 	plt.title('Sentiment Analysis of Given Topic: ' + query)
+
+	plt.subplot(222)
+	plt.barh(y_pos, performance_user, align='center', alpha=0.6)
+	plt.yticks(y_pos, labels)
+	plt.xlabel('Sentiment Score')
+	plt.title('Sentiment Analysis of Given Topic: ' + query)
+
+	plt.subplots_adjust(top=0.92, bottom=0.08, left=0.10, right=0.95, hspace=0.25,
+	                    wspace=0.35)
+
 	plt.show()
 
 
