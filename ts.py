@@ -3,6 +3,7 @@
 influencial figures about given topics"""
 
 from __future__ import print_function
+from scipy import stats
 import tweepy
 import numpy as np
 import matplotlib.pyplot as plt; plt.rcdefaults()
@@ -23,13 +24,16 @@ api = tweepy.API(auth)
 topic_dict = json.loads(open("topic_data.json", "r").read())
 
 handles = open("influencers.txt", "r")
-sent_scores = []
+general_sent = []
+influ_sent = []
+topic_list = []
+sent = []
 
 def general_scrape(query):
 	q = query
 	tweet_struct = {}
 	tweet_struct[q] = {}
-	tweets = api.search(q=query, pages=5)
+	tweets = api.search(q=query, per_page=20, pages=50)
 	print("[SCRAPING] general users")
 	print("...")
 	sum_pos = 0
@@ -58,7 +62,7 @@ def general_scrape(query):
 		sum_neu += sent_dict['neutral']
 		tweet_struct[q][id]['sentiment'] = sent_dict
 		tweet_counter += 1
-	sent_scores.append([sum_pos / tweet_counter, sum_neg / tweet_counter, sum_neu / tweet_counter])
+	general_sent.append([sum_pos / tweet_counter, sum_neg / tweet_counter, sum_neu / tweet_counter])
 	return tweet_struct
 
 
@@ -100,7 +104,7 @@ def scrape_user(user_list):
 			sum_neu += sent_dict['neutral']
 			user_struct[u][id]['sentiment'] = sent_dict
 			tweet_counter += 1
-	sent_scores.append([sum_pos/tweet_counter, sum_neg/tweet_counter, sum_neu/tweet_counter])
+	influ_sent.append([sum_pos/tweet_counter, sum_neg/tweet_counter, sum_neu/tweet_counter])
 	return user_struct
 
 
@@ -109,35 +113,47 @@ def struct_json(topic):
 	topic_dict[t] = {}
 	topic_dict[t]['general'] = general_scrape(topic)
 	topic_dict[t]['users'] = scrape_user(open('influencers.txt', 'r'))
-	print(sent_scores)
 	return topic_dict
 
 def plot():
 	labels = ('Positive', 'Negative', 'Neutral')
 	y_pos = np.arange(len(labels))
-	performance_general = sent_scores[0]
-	performance_user = sent_scores[1]
+	count = 0
 
-	plt.figure(1)
-	plt.subplot(221)
-	plt.barh(y_pos, performance_general, align='center', alpha=0.6)
-	plt.yticks(y_pos, labels)
-	plt.xlabel('Sentiment Score')
-	plt.title('Sentiment Analysis of Given Topic: ' + query)
-
-	plt.subplot(222)
-	plt.barh(y_pos, performance_user, align='center', alpha=0.6)
-	plt.yticks(y_pos, labels)
-	plt.xlabel('Sentiment Score')
-	plt.title('Sentiment Analysis of Given Topic: ' + query)
-
-	plt.subplots_adjust(top=0.92, bottom=0.08, left=0.10, right=0.95, hspace=0.25,
-	                    wspace=0.35)
-
+	for topic in topic_list:
+		print("For Topic: " + topic)
+		plt.figure()
+		plt.subplot(221)
+		plt.barh(y_pos, general_sent[count], align='center', alpha=0.6)
+		print("General Sentiment: " + str(general_sent[count]))
+		plt.yticks(y_pos, labels)
+		plt.xlabel('Sentiment Score')
+		plt.title('Sentiment Analysis of Given Topic: ' + topic)
+		plt.subplot(222)
+		plt.barh(y_pos, influ_sent[count], align='center', alpha=0.6)
+		print("Influencer(s) Sentiment: " + str(influ_sent[count]))
+		plt.yticks(y_pos, labels)
+		plt.xlabel('Sentiment Score')
+		plt.title('Sentiment Analysis of Given Topic: ' + topic)
+		print('T Test Statistic: ' + str(stats.ttest_ind(general_sent[count], influ_sent[count], equal_var=False)[0]))
+		print('Two-Tailed P Value : ' + str(stats.ttest_ind(general_sent[count], influ_sent[count], equal_var=False)[1]))
+		plt.subplots_adjust(top=0.92, bottom=0.08, left=0.10, right=0.95, hspace=0.25,
+		                    wspace=0.35)
+		print(" ")
+		count+=1
 	plt.show()
 
 
-query = raw_input("Enter your topic: ")
+main_dict = {}
+query = ''
+while query != ' ':
+	query = raw_input("Enter your topic (type 'quit' to exit): ")
+	if query == 'quit':
+		break
+	main_dict[query] = {}
+	topic_list.append(query)
+	main_dict[query]['data'] = struct_json(query)
+
 with open('topic_data.json', 'w') as fo:
-	fo.write(json.dumps(struct_json(query), indent=4, sort_keys=False))
+	fo.write(json.dumps(main_dict, indent=4, sort_keys=False))
 plot()
