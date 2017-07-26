@@ -76,7 +76,8 @@ def scrape_user(user_list):
 	for user in user_list:
 		try:
 			user_tweets = api.user_timeline(id=user, count=50)
-			print("[SCRAPING] " + str(user) + "...")
+			print("[SCRAPING] " + str(user))
+			print("...")
 		except tweepy.TweepError as e:
 			print("*** Encountered exception: " + str(e))
 		u = user
@@ -139,7 +140,7 @@ def plot():
 		print('Two-Tailed P Value : ' + str(stats.ttest_ind(general_sent[count], influ_sent[count], equal_var=False)[1]))
 		plt.subplots_adjust(top=0.92, bottom=0.08, left=0.10, right=0.95, hspace=0.25,
 		                    wspace=0.35)
-		print(" ")
+		print(' ')
 		count+=1
 	plt.show()
 
@@ -155,6 +156,7 @@ while query != ' ':
 for query in topic_list:
 	main_dict[query] = {}
 	main_dict[query]['data'] = struct_json(query)
+	print('...')
 
 with open('topic_data.json', 'w') as fo:
 	fo.write(json.dumps(main_dict, indent=4, sort_keys=False))
