@@ -150,8 +150,10 @@ while query != ' ':
 	query = raw_input("Enter your topic (type 'quit' to exit): ")
 	if query == 'quit':
 		break
-	main_dict[query] = {}
 	topic_list.append(query)
+
+for query in topic_list:
+	main_dict[query] = {}
 	main_dict[query]['data'] = struct_json(query)
 
 with open('topic_data.json', 'w') as fo:
