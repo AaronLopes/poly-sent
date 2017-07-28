@@ -74,7 +74,7 @@ def general_scrape(query):
 			if sentiment > 0.25:
 				sent_dict['pos'] = sentiment
 				sum_pos += sent_dict['pos']
-			if 0.25 > sentiment > -0.25:
+			if 0.25 > sentiment > 0:
 				sent_dict['neutral'] = abs(sentiment)
 				sum_neu += sent_dict['neutral']
 			else:
@@ -96,8 +96,11 @@ def scrape_user(user_list, query):
 	sum_pos = 0
 	sum_neg = 0
 	sum_neu = 0
+
+	av_pos = 0
+	av_neu = 0
+	av_neg = 0
 	for user in user_list:
-		tweet_counter = 0
 		try:
 			q = str("q="+query+"%3A"+user+"&result_type=recent")
 			user_tweets = api.GetSearch(
@@ -107,9 +110,14 @@ def scrape_user(user_list, query):
 			print("...")
 		except twitter.error.TwitterError as e:
 			print("*** Encountered exception: " + str(e))
+			if not influ_sent:
+				influ_sent.append([0, 0, 0])
+			else:
+				influ_sent.append([av_pos, av_neu, av_neg])
 			plot()
 		u = user
 		user_struct[u] = {}
+		tweet_counter = 0
 		for tweet in user_tweets:
 			id = str(tweet.id)
 			text = tweet.text.encode("utf-8")
@@ -128,7 +136,7 @@ def scrape_user(user_list, query):
 				if sentiment > 0.25:
 					sent_dict['pos'] = sentiment
 					sum_pos += sent_dict['pos']
-				if 0.25 > sentiment > -0.25:
+				if 0.25 > sentiment > 0:
 					sent_dict['neutral'] = abs(sentiment)
 					sum_neu += sent_dict['neutral']
 				else:
@@ -140,10 +148,10 @@ def scrape_user(user_list, query):
 				print("Invalid request, continuing to scrape...")
 		print("Tweets Scraped: " + str(tweet_counter))
 		if tweet_counter > 0:
-			influ_sent.append([int((sum_pos / tweet_counter) * 100), int((sum_neu / tweet_counter) * 100),
-			                     int((sum_neg / tweet_counter) * 100)])
-		else:
-			influ_sent.append([0, 0, 0])
+			av_pos = int((sum_pos / tweet_counter) * 100)
+			av_neu = int((sum_neu / tweet_counter) * 100)
+			av_neg = int((sum_neg / tweet_counter) * 100)
+			influ_sent.append([av_pos, av_neu, av_neg])
 	return user_struct
 
 def struct_json(topic):
@@ -154,7 +162,7 @@ def struct_json(topic):
 
 
 def plot():
-	labels = ('Positive', 'Negative', 'Neutral')
+	labels = ('Positive', 'Neutral', 'Negative')
 	y_pos = np.arange(len(labels))
 	count = 0
 	for topic in topic_list:
