@@ -15,11 +15,11 @@ import json
 
 client = language.Client()
 
-consumer_key = 'Vduhbz2fU7IpZNwinIQtEVihH'
-consumer_key_secret = 'yUyulJnd70F5UOJ7nlFhZefGXa0X022cZc7QkxDb14Khs53e01'
+consumer_key = '5dBoQA35kcig7TwCk2M0Xhjo2'
+consumer_key_secret = 'QGtLsOmi4ZsxXgDHYsWNr0uizQzSUhm8KPd3GtPf30nYvyVdB7'
 
-access_token = '2324074514-1VIioiwCafm9ErU3JeCU8lzsuxivw8qVv3zB6w0'
-access_token_secret = '	9fuQOuKWSisy6jl7HbjYZabiB0lFfGHxFlV2UW3dDt0yg'
+access_token = '2324074514-SY9hg2Qx90nxGNdNLWOYe5HqigO2syvsoSn2jhu'
+access_token_secret = 't0ZQ2ruh65dHApEsKlMEOCAdft6JwS5WHAFCBou8UZusK'
 
 api = twitter.Api(consumer_key=consumer_key,
                   consumer_secret=consumer_key_secret,
