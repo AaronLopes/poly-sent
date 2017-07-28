@@ -4,12 +4,15 @@ influencial figures about given topics"""
 
 from __future__ import print_function
 from scipy import stats
+from google.cloud import language
 import tweepy
 import numpy as np
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import matplotlib.pyplot as plt
 import requests
 import json
+
+client = language.Client()
 
 consumer_key = 'oZNDqncnvc9hFDwYocRGukS0V'
 consumer_key_secret = 'wh4kSf3Xa11HWdShuW3Wdqkgdq67wOAeW7FCeTklUltshF6eZA'
@@ -39,6 +42,7 @@ def general_scrape(query):
 	sum_pos = 0
 	sum_neg = 0
 	sum_neu = 0
+
 	tweet_counter = 0
 	for tweet in tweets:
 		id = str(tweet.id)
@@ -48,21 +52,26 @@ def general_scrape(query):
 		tweet_struct[q][id]['retweets'] = tweet.retweet_count
 		tweet_struct[q][id]['text'] = tweet.text.encode("utf-8")
 		t = tweet.text.encode("utf-8")
+		print(t)
 		sent_data = [
 			('text', t)
 		]
-		sent_result = requests.post('http://text-processing.com/api/sentiment/', data=sent_data)
-		sent_json = sent_result.json()
-		sent_dict = {}
-		sent_dict['pos'] = int(round(sent_json['probability']['pos'] * 100))
-		sum_pos += sent_dict['pos']
-		sent_dict['neg'] = int(round(sent_json['probability']['neg'] * 100))
-		sum_neg += sent_dict['neg']
-		sent_dict['neutral'] = int(round(sent_json['probability']['neutral'] * 100))
-		sum_neu += sent_dict['neutral']
-		tweet_struct[q][id]['sentiment'] = sent_dict
-		tweet_counter += 1
-	general_sent.append([sum_pos / tweet_counter, sum_neg / tweet_counter, sum_neu / tweet_counter])
+		try:
+			sent_result = requests.post('http://text-processing.com/api/sentiment/', data=sent_data)
+			sent_json = sent_result.json()
+			sent_dict = {}
+			sent_dict['pos'] = int(round(sent_json['probability']['pos'] * 100))
+			sum_pos += sent_dict['pos']
+			sent_dict['neg'] = int(round(sent_json['probability']['neg'] * 100))
+			sum_neg += sent_dict['neg']
+			sent_dict['neutral'] = int(round(sent_json['probability']['neutral'] * 100))
+			sum_neu += sent_dict['neutral']
+			tweet_struct[q][id]['sentiment'] = sent_dict
+			tweet_counter += 1
+		except ValueError:
+			print("No JSON Object Found, continuing scraping")
+		if tweet_counter > 0:
+			general_sent.append([sum_pos / tweet_counter, sum_neg / tweet_counter, sum_neu / tweet_counter])
 	return tweet_struct
 
 
@@ -91,22 +100,44 @@ def scrape_user(user_list):
 			user_struct[u][id]['retweets'] = tweet.retweet_count
 			user_struct[u][id]['followers'] = tweet.user.followers_count
 			t = tweet.text.encode("utf-8")
+			print(t)
 			sent_data = [
 				('text', t)
 			]
-			sent_result = requests.post('http://text-processing.com/api/sentiment/', data=sent_data)
-			sent_json = sent_result.json()
-			sent_dict = {}
-			sent_dict['pos'] = int(round(sent_json['probability']['pos'] * 100))
-			sum_pos += sent_dict['pos']
-			sent_dict['neg'] = int(round(sent_json['probability']['neg'] * 100))
-			sum_neg += sent_dict['neg']
-			sent_dict['neutral'] = int(round(sent_json['probability']['neutral'] * 100))
-			sum_neu += sent_dict['neutral']
-			user_struct[u][id]['sentiment'] = sent_dict
-			tweet_counter += 1
-	influ_sent.append([sum_pos/tweet_counter, sum_neg/tweet_counter, sum_neu/tweet_counter])
+			try:
+				sent_result = requests.post('http://text-processing.com/api/sentiment/', data=sent_data)
+				sent_json = sent_result.json()
+				sent_dict = {}
+				sent_dict['pos'] = int(round(sent_json['probability']['pos'] * 100))
+				sum_pos += sent_dict['pos']
+				sent_dict['neg'] = int(round(sent_json['probability']['neg'] * 100))
+				sum_neg += sent_dict['neg']
+				sent_dict['neutral'] = int(round(sent_json['probability']['neutral'] * 100))
+				sum_neu += sent_dict['neutral']
+				user_struct[u][id]['sentiment'] = sent_dict
+				tweet_counter += 1
+			except ValueError:
+				print("No JSON Object Found, continuing scraping")
+		if tweet_counter > 0:
+			influ_sent.append([sum_pos/tweet_counter, sum_neg/tweet_counter, sum_neu/tweet_counter])
 	return user_struct
+
+def sentiment_text(text):
+	"""Detects sentiment in the text."""
+	language_client = language.Client()
+
+	if isinstance(text, six.binary_type):
+		text = text.decode('utf-8')
+
+	# Instantiates a plain text document.
+	document = language_client.document_from_text(text)
+
+	# Detects sentiment in the document. You can also analyze HTML with:
+	#   document.doc_type == language.Document.HTML
+	sentiment = document.analyze_sentiment().sentiment
+
+	print('Score: {}'.format(sentiment.score))
+	print('Magnitude: {}'.format(sentiment.magnitude))
 
 
 def struct_json(topic):
