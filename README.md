@@ -2,4 +2,4 @@
 A script written by Christine Park !!
 
 # Run
-ts.py
+ts2.py
