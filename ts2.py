@@ -15,16 +15,24 @@ import json
 
 client = language.Client()
 
-consumer_key = '5dBoQA35kcig7TwCk2M0Xhjo2'
-consumer_key_secret = 'QGtLsOmi4ZsxXgDHYsWNr0uizQzSUhm8KPd3GtPf30nYvyVdB7'
+consumer_key = ['TuazY9pjad7QUCuzU9zJbreV8',
+                'oZNDqncnvc9hFDwYocRGukS0V',
+                '5dBoQA35kcig7TwCk2M0Xhjo2']
+consumer_key_secret = ['afNPWMmB4HonTDWSOToePUjKO0wb3eL34NiTb3whk4RkOneJvi',
+                       'wh4kSf3Xa11HWdShuW3Wdqkgdq67wOAeW7FCeTklUltshF6eZA',
+                       'QGtLsOmi4ZsxXgDHYsWNr0uizQzSUhm8KPd3GtPf30nYvyVdB7']
 
-access_token = '2324074514-SY9hg2Qx90nxGNdNLWOYe5HqigO2syvsoSn2jhu'
-access_token_secret = 't0ZQ2ruh65dHApEsKlMEOCAdft6JwS5WHAFCBou8UZusK'
+access_token = ['2324074514-LovPdW7V2VgDLUZuhpq8M0Ztnfj4TdILtih7cTw',
+                '2324074514-GThBujMPCXhg6Xjjt9xBH4AueTovPEQTet2j5Kn',
+                '2324074514-SY9hg2Qx90nxGNdNLWOYe5HqigO2syvsoSn2jhu']
+access_token_secret = ['Qo2ZKipTZ09bTZKtiToehJG5PI4BgiYNgTU1Ot0wmHndM',
+                       'diYMPbqq0sh8fqpP6rHKp2dMENdvkMBlWwkvYD45Y0ImH',
+                       't0ZQ2ruh65dHApEsKlMEOCAdft6JwS5WHAFCBou8UZusK']
 
-api = twitter.Api(consumer_key=consumer_key,
-                  consumer_secret=consumer_key_secret,
-                  access_token_key=access_token,
-                  access_token_secret=access_token_secret)
+api = twitter.Api(consumer_key=consumer_key[0],
+                  consumer_secret=consumer_key_secret[0],
+                  access_token_key=access_token[0],
+                  access_token_secret=access_token_secret[0])
 
 #auth = tweepy.OAuthHandler(consumer_key, consumer_key_secret)
 #auth.set_access_token(access_token, access_token_secret)
@@ -37,6 +45,7 @@ general_sent = []
 influ_sent = []
 topic_list = []
 sent = []
+
 
 
 def general_scrape(query):
@@ -56,6 +65,11 @@ def general_scrape(query):
 	sum_pos = 0
 	sum_neg = 0
 	sum_neu = 0
+
+	pos_count = 0
+	neu_count = 0
+	neg_count = 0
+
 	tweet_counter = 0
 	for tweet in tweets:
 		id = str(tweet.id)
@@ -74,32 +88,53 @@ def general_scrape(query):
 			if sentiment > 0.25:
 				sent_dict['pos'] = sentiment
 				sum_pos += sent_dict['pos']
+				pos_count += 1
 			if 0.25 > sentiment > 0:
 				sent_dict['neutral'] = abs(sentiment)
 				sum_neu += sent_dict['neutral']
+				neu_count += 1
 			else:
 				sent_dict['neg'] = abs(sentiment)
 				sum_neg += sent_dict['neg']
+				neg_count += 1
 			tweet_struct[q][id]['sentiment'] = sent_dict
 			tweet_counter += 1
 		except exceptions.BadRequest:
 			print("Invalid request, continuing to scrape...")
 	print("Tweets Scraped: " + str(tweet_counter))
-	if tweet_counter > 0:
-		general_sent.append([int((sum_pos / tweet_counter) * 100), int((sum_neu / tweet_counter) * 100), int((sum_neg / tweet_counter) * 100)])
+	if pos_count > 0:
+		av_pos = int((sum_pos / pos_count) * 100)
+	else:
+		av_pos = 0
+	if neu_count > 0:
+		av_neu = int((sum_neu / neu_count) * 100)
+	else:
+		av_neu = 0
+	if neg_count > 0:
+		av_neg = int((sum_neg / neg_count) * 100)
+	else:
+		av_neg = 0
+	general_sent.append([av_pos, av_neu, av_neg])
 	return tweet_struct
 
 
 def scrape_user(user_list, query):
 	user_struct = {}
 	user_tweets = []
+	total_tweets = 0
+
 	sum_pos = 0
 	sum_neg = 0
 	sum_neu = 0
 
+	pos_count = 0
+	neu_count = 0
+	neg_count = 0
+
 	av_pos = 0
 	av_neu = 0
 	av_neg = 0
+
 	for user in user_list:
 		try:
 			q = str("q="+query+"%3A"+user+"&result_type=recent")
@@ -136,28 +171,41 @@ def scrape_user(user_list, query):
 				if sentiment > 0.25:
 					sent_dict['pos'] = sentiment
 					sum_pos += sent_dict['pos']
+					pos_count += 1
 				if 0.25 > sentiment > 0:
 					sent_dict['neutral'] = abs(sentiment)
 					sum_neu += sent_dict['neutral']
+					neu_count += 1
 				else:
 					sent_dict['neg'] = abs(sentiment)
 					sum_neg += sent_dict['neg']
+					neg_count += 1
 				user_struct[u][id]['sentiment'] = sent_dict
 				tweet_counter += 1
+				total_tweets += 1
 			except exceptions.BadRequest:
 				print("Invalid request, continuing to scrape...")
 		print("Tweets Scraped: " + str(tweet_counter))
-		if tweet_counter > 0:
-			av_pos = int((sum_pos / tweet_counter) * 100)
-			av_neu = int((sum_neu / tweet_counter) * 100)
-			av_neg = int((sum_neg / tweet_counter) * 100)
-			influ_sent.append([av_pos, av_neu, av_neg])
+		if pos_count > 0:
+			av_pos = int((sum_pos / pos_count) * 100)
+		else:
+			av_pos = 0
+		if neu_count > 0:
+			av_neu = int((sum_neu / neu_count) * 100)
+		else:
+			av_neu = 0
+		if neg_count > 0:
+			av_neg = int((sum_neg / neg_count) * 100)
+		else:
+			av_neg = 0
+	influ_sent.append([av_pos, av_neu, av_neg])
 	return user_struct
 
 def struct_json(topic):
 	t = topic
 	topic_dict[t] = {}
 	topic_dict[t]['general'] = general_scrape(topic)
+	topic_dict[t]['user'] = scrape_user(handles, query)
 	return topic_dict
 
 
@@ -201,7 +249,6 @@ while query != ' ':
 for query in topic_list:
 	main_dict[query] = {}
 	main_dict[query]['data'] = struct_json(query)
-	scrape_user(handles, query)
 	print('...')
 
 with open('topic_data.json', 'w') as fo:

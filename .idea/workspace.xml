@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e9b810e-5940-4dfb-891d-fc0c7f31107f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/topic_data.json" afterPath="$PROJECT_DIR$/topic_data.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ts2.py" afterPath="$PROJECT_DIR$/ts2.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,8 +49,8 @@
       <file leaf-file-name="ts2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ts2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="88" column="47" lean-forward="true" selection-start-line="88" selection-start-column="47" selection-end-line="88" selection-end-column="47" />
+            <state relative-caret-position="314">
+              <caret line="232" column="96" lean-forward="false" selection-start-line="232" selection-start-column="96" selection-end-line="232" selection-end-column="96" />
               <folding>
                 <element signature="e#141#178#0" expanded="true" />
               </folding>
@@ -74,19 +74,6 @@
             <state relative-caret-position="60">
               <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="topic_data.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/topic_data.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1501269395000" expanded="true" signature="46764:46790" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
-                <marker date="1501269395000" expanded="true" signature="46764:46812" ph="{...}" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -120,6 +107,8 @@
       <find>user_l</find>
       <find>user_twe</find>
       <find>influ_sent</find>
+      <find>GavinNewson</find>
+      <find>influ_sent</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -147,7 +136,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="816" />
+    <option name="width" value="720" />
     <option name="height" value="873" />
   </component>
   <component name="ProjectView">
@@ -483,16 +472,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="816" height="873" extended-state="0" />
+    <frame x="0" y="23" width="720" height="873" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3345588" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.43194443" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.56805557" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -524,8 +514,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
           <folding>
-            <marker date="1501269395000" expanded="true" signature="46764:46790" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
-            <marker date="1501269395000" expanded="true" signature="46764:46812" ph="{...}" />
+            <marker date="1501302123000" expanded="true" signature="372564:372590" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -561,8 +550,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
           <folding>
-            <marker date="1501269395000" expanded="true" signature="46764:46790" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
-            <marker date="1501269395000" expanded="true" signature="46764:46812" ph="{...}" />
+            <marker date="1501302123000" expanded="true" signature="372564:372590" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -598,8 +586,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
           <folding>
-            <marker date="1501269395000" expanded="true" signature="46764:46790" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
-            <marker date="1501269395000" expanded="true" signature="46764:46812" ph="{...}" />
+            <marker date="1501302123000" expanded="true" signature="372564:372590" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -636,8 +623,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="2" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
           <folding>
-            <marker date="1501269395000" expanded="true" signature="46764:46790" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
-            <marker date="1501269395000" expanded="true" signature="46764:46812" ph="{...}" />
+            <marker date="1501302123000" expanded="true" signature="372564:372590" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -674,8 +660,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="2" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
           <folding>
-            <marker date="1501269395000" expanded="true" signature="46764:46790" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
-            <marker date="1501269395000" expanded="true" signature="46764:46812" ph="{...}" />
+            <marker date="1501302123000" expanded="true" signature="372564:372590" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -711,8 +696,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="2" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
           <folding>
-            <marker date="1501269395000" expanded="true" signature="46764:46790" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
-            <marker date="1501269395000" expanded="true" signature="46764:46812" ph="{...}" />
+            <marker date="1501302123000" expanded="true" signature="372564:372590" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -740,8 +724,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1501269395000" expanded="true" signature="46764:46790" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
-            <marker date="1501269395000" expanded="true" signature="46764:46812" ph="{...}" />
+            <marker date="1501302123000" expanded="true" signature="372564:372590" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -769,8 +752,7 @@
         <state relative-caret-position="2355">
           <caret line="157" column="1" lean-forward="false" selection-start-line="157" selection-start-column="1" selection-end-line="157" selection-end-column="1" />
           <folding>
-            <marker date="1501269395000" expanded="true" signature="46764:46790" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
-            <marker date="1501269395000" expanded="true" signature="46764:46812" ph="{...}" />
+            <marker date="1501302123000" expanded="true" signature="372564:372590" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -798,8 +780,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1501269395000" expanded="true" signature="46764:46790" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
-            <marker date="1501269395000" expanded="true" signature="46764:46812" ph="{...}" />
+            <marker date="1501302123000" expanded="true" signature="372564:372590" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -817,8 +798,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1501269395000" expanded="true" signature="46764:46790" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
-            <marker date="1501269395000" expanded="true" signature="46764:46812" ph="{...}" />
+            <marker date="1501302123000" expanded="true" signature="372564:372590" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -884,37 +864,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/topic_data.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1501269395000" expanded="true" signature="46764:46790" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
-            <marker date="1501269395000" expanded="true" signature="46764:46812" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="38" lean-forward="false" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/poly-sent-7193b5c08367.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -927,10 +880,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/topic_data.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5468">
+          <caret line="10" column="32" lean-forward="true" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
+          <folding>
+            <marker date="1501302123000" expanded="true" signature="372564:372590" ph="{&quot;text&quot;: &quot;RT @ananavarro: No on school transgender bathrooms; no recognition of Pride month; banned Transgenders from serving; now this. Trump's no f\u2026&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/poly-sent-7193b5c08367.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ts2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="88" column="47" lean-forward="true" selection-start-line="88" selection-start-column="47" selection-end-line="88" selection-end-column="47" />
+        <state relative-caret-position="314">
+          <caret line="232" column="96" lean-forward="false" selection-start-line="232" selection-start-column="96" selection-end-line="232" selection-end-column="96" />
           <folding>
             <element signature="e#141#178#0" expanded="true" />
           </folding>
