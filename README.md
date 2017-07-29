@@ -5,11 +5,11 @@ A script written by Christine Park !!
 # Run
 ======
 To revalidate credentials:
-```python
+```bash
 export GOOGLE_APPLICATION_CREDENTIALS=poly-sent-7193b5c08367.json
 ```
 To run:
-```python
+```bash
 python ts2.py
 ```
 # Problems
