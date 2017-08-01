@@ -1,5 +1,5 @@
 # PolySent
-A script written by Christine Park !!
+A terminal application used to compare the general and a given list of influencers sentiment on given topics.
 
 # Run
 To revalidate credentials:
