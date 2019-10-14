@@ -2,10 +2,6 @@
 A terminal application used to compare the general and a given list of influencers sentiment on given topics.
 
 # Run
-To revalidate credentials:
-```bash
-export GOOGLE_APPLICATION_CREDENTIALS=poly-sent-7193b5c08367.json
-```
 To run:
 ```bash
 python ts2.py
